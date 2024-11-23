@@ -44,7 +44,7 @@ contract FundMe {
     }
 
     function cheaperWithdraw() public onlyOwner {
-        uint256 fundersLength = s_funders.length; //to read it only 1 time from storage . this is now a MEMORY VAR not STorage var
+        uint256 fundersLength = s_funders.length; //to read it only 1 time from storage . this is now a MEMORY VAR not STORAGE var
         for (uint256 funderIndex = 0; funderIndex < fundersLength; funderIndex++) {
             address funder = s_funders[funderIndex]; //still reading from storage here
             s_addressToAmountFunded[funder] = 0; // still reading from storage here

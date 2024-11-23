@@ -20,7 +20,7 @@ contract FundMeTest is Test {
     function setUp() external {
         //fundMe = new FundMe(0x694AA1769357215DE4FAC081bf1f309aDC325306);
         DeployFundMe deployFundMe = new DeployFundMe();//create new deployfundMe\
-        fundMe = deployFundMe.run();//cos run will now return a fundme contract
+        fundMe = deployFundMe.run();// run will now return a Fundme contract
         vm.deal(user, STARTING_BALANCE);  
     }
 
@@ -41,13 +41,13 @@ contract FundMeTest is Test {
     //wanna test the fund function
     function testFundFailWithoutEnoughETH() public {
         vm.expectRevert(); //next line should revert
-        fundMe.fund(); //diid not add fund {} .this is equiv to us sending 0 ETH therefore will REVERT and pass forge test
+        fundMe.fund(); //did not add fund {} .this is equivalent to us sending 0 ETH, therefore will REVERT and pass forge test
     }
 
     //wanna test data structures
     function testFundMeUpdatesFundedDataStructures() public {
-        vm.prank(user); //next tx will be sent bu user
-        fundMe.fund{value: SEND_VALUE}(); //we sending 10 eth(bigger than minumum)
+        vm.prank(user); //next tx will be sent by user
+        fundMe.fund{value: SEND_VALUE}(); //we are sending 10 eth(bigger than minumum)
 
         //uint256 amountFunded = fundMe.getAddressToAmountFunded(address(this)); //remove this address for updated "USER's"
         uint256 amountFunded = fundMe.getAddressToAmountFunded(user);
@@ -58,8 +58,8 @@ contract FundMeTest is Test {
         vm.prank(user);
         fundMe.fund{value: SEND_VALUE}();
 
-        address funder = fundMe.getFunder(0); //should be user as we only hv one funder
-        assertEq(funder, user); //we checking whether funder === user
+        address funder = fundMe.getFunder(0); //should be user as we only have one funder
+        assertEq(funder, user); //we checking whether funder == user
         
     }
 
@@ -105,7 +105,7 @@ contract FundMeTest is Test {
     function testWithdrawFromMultipleFundersCheaper() public funded {
         //ARRANGE
         uint160 numberOfFunders = 10;
-        uint160 startingFunderIndex =1; //we start at index 1 ad not 0 coz it might REVERT 
+        uint160 startingFunderIndex =1; //we start at index 1 ad not 0 because it might REVERT 
 
         for(uint160 i = startingFunderIndex; i < numberOfFunders ; i++) {
             //vm.prank new address
